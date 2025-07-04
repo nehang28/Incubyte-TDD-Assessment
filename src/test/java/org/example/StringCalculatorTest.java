@@ -15,8 +15,18 @@ public class StringCalculatorTest {
         Assertions.assertEquals(15, StringCalculator.add("15"));
     }
 
-    @Test void twoNumbersStringReturnsSumOfTwoNumbers() {
-        Assertions.assertEquals(7, StringCalculator.add("5,2"));
+    @Test
+    void twoNumbersStringReturnsSumOfTwoNumbers() {
+        Assertions.assertEquals(6, StringCalculator.add("1,5"));
         Assertions.assertEquals(44, StringCalculator.add("22,22"));
     }
+
+    @Test
+    void stringOfAnyNumbersReturnsSumOfThoseNumbers() {
+        Assertions.assertEquals(22, StringCalculator.add("5,2,8,7"));
+        Assertions.assertEquals(77, StringCalculator.add("11,22,33,11"));
+        Assertions.assertEquals(18, StringCalculator.add("10,5,3"));
+    }
+
+
 }
