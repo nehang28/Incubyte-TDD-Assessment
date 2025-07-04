@@ -28,5 +28,11 @@ public class StringCalculatorTest {
         Assertions.assertEquals(18, StringCalculator.add("10,5,3"));
     }
 
+    @Test
+    void handleNewLineInNumbersStringReturnsSumOfThoseNumbers() {
+        Assertions.assertEquals(6, StringCalculator.add("1\n2,3"));
+        Assertions.assertEquals(44, StringCalculator.add("\n33,11"));
+        Assertions.assertEquals(32, StringCalculator.add("22,10\n"));
+    }
 
 }

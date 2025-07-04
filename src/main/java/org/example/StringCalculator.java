@@ -5,15 +5,15 @@ public class StringCalculator {
         if(input.isEmpty()) {
             return 0;
         }
-        String[] numbers = input.split(",");
-        if(numbers.length == 1) {
-            return Integer.parseInt(numbers[0]);
-        } else if(numbers.length == 2) {
-            return Integer.parseInt(numbers[0]) + Integer.parseInt(numbers[1]);
-        }
+
+        String delimiter = "[,\n]";
+
+        String[] numbers = input.split(delimiter);
         int sum = 0;
         for(String number : numbers) {
-            sum += Integer.parseInt(number);
+            if(!number.isEmpty()) {
+                sum += Integer.parseInt(number.trim());
+            }
         }
         return sum;
     }
