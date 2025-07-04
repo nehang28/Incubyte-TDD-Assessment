@@ -35,4 +35,13 @@ public class StringCalculatorTest {
         Assertions.assertEquals(32, StringCalculator.add("22,10\n"));
     }
 
+    @Test
+    void customDelimiterInNumbersStringReturnsSumOfThoseNumbers() {
+        Assertions.assertEquals(3, StringCalculator.add("//;\n1;2"));
+        Assertions.assertEquals(6, StringCalculator.add("///\n1/2\n3"));
+        Assertions.assertEquals(13, StringCalculator.add("//:\n1:2\n3:7"));
+        Assertions.assertEquals(16, StringCalculator.add("// \n1 12 3"));
+        Assertions.assertEquals(8, StringCalculator.add("//.\n1.2\n3.2"));
+    }
+
 }
