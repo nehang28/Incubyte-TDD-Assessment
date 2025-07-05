@@ -20,15 +20,19 @@ public class StringCalculator {
         }
 
         String[] numbers = input.split(delimiter);
+        List<Integer> negativeNumbers = new ArrayList<>();
         int sum = 0;
         for(String number : numbers) {
-            if(!number.isEmpty()) {
+            if(!number.trim().isEmpty()) {
                 int numberInt = Integer.parseInt(number.trim());
                 if(numberInt < 0) {
-                    throw new NumberFormatException("negative number not allowed <" + numberInt + ">");
+                    negativeNumbers.add(numberInt);
                 }
                 sum += Integer.parseInt(number.trim());
             }
+        }
+        if(!negativeNumbers.isEmpty()) {
+            throw new NumberFormatException("negative number not allowed " + negativeNumbers);
         }
         return sum;
     }

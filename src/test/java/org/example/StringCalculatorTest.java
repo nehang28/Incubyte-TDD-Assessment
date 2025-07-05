@@ -49,17 +49,35 @@ public class StringCalculatorTest {
         NumberFormatException ex1 = Assertions.assertThrows(NumberFormatException.class, () -> {
             StringCalculator.add("2\n-1");
         });
-        Assertions.assertEquals("negative number not allowed <-1>", ex1.getMessage());
+        Assertions.assertEquals("negative number not allowed [-1]", ex1.getMessage());
 
         NumberFormatException ex2 = Assertions.assertThrows(NumberFormatException.class, () -> {
             StringCalculator.add("-3,4,5");
         });
-        Assertions.assertEquals("negative number not allowed <-3>", ex2.getMessage());
+        Assertions.assertEquals("negative number not allowed [-3]", ex2.getMessage());
 
         NumberFormatException ex3 = Assertions.assertThrows(NumberFormatException.class, () -> {
             StringCalculator.add("\n16,4,-5");
         });
-        Assertions.assertEquals("negative number not allowed <-5>", ex3.getMessage());
+        Assertions.assertEquals("negative number not allowed [-5]", ex3.getMessage());
+    }
+
+    @Test
+    void multipleNegativeNumberInNumbersStringThrowsException() {
+        NumberFormatException ex1 = Assertions.assertThrows(NumberFormatException.class, () -> {
+            StringCalculator.add("//;\n-1;-2");
+        });
+        Assertions.assertEquals("negative number not allowed [-1, -2]", ex1.getMessage());
+
+        NumberFormatException ex2 = Assertions.assertThrows(NumberFormatException.class, () -> {
+            StringCalculator.add("1,2,-3");
+        });
+        Assertions.assertEquals("negative number not allowed [-3]", ex2.getMessage());
+
+        NumberFormatException ex3 = Assertions.assertThrows(NumberFormatException.class, () -> {
+            StringCalculator.add("//:\n-1:-2\n3:-7");
+        });
+        Assertions.assertEquals("negative number not allowed [-1, -2, -7]", ex3.getMessage());
     }
 
 }
