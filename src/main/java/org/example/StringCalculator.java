@@ -14,8 +14,11 @@ public class StringCalculator {
 
         if(input.startsWith("//")) {
             int delimiterEndIndex = input.indexOf("\n");
-//            delimiter = input.substring(2, delimiterEndIndex) + "|\n";
-            delimiter = Pattern.quote(input.substring(2, delimiterEndIndex));
+            delimiter = input.substring(2, delimiterEndIndex) + "|\n";
+//            delimiter = Pattern.quote(input.substring(2, delimiterEndIndex));
+            if(delimiter.startsWith("[") && delimiter.endsWith("]")) {
+                delimiter = delimiter.substring(1, delimiter.length() - 1);
+            }
             delimiter += "|\n";
             input = input.substring(delimiterEndIndex + 1);
         }

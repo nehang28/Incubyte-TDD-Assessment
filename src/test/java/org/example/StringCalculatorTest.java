@@ -41,7 +41,7 @@ public class StringCalculatorTest {
         Assertions.assertEquals(6, StringCalculator.add("///\n1/2\n3"));
         Assertions.assertEquals(13, StringCalculator.add("//:\n1:2\n3:7"));
         Assertions.assertEquals(16, StringCalculator.add("// \n1 12 3"));
-        Assertions.assertEquals(8, StringCalculator.add("//.\n1.2\n3.2"));
+        Assertions.assertEquals(8, StringCalculator.add("//;\n1;2\n3;2"));
     }
 
     @Test
@@ -84,6 +84,13 @@ public class StringCalculatorTest {
     void numberBiggerThan1000ShouldBeIgnored() {
         Assertions.assertEquals(2, StringCalculator.add("2,1001"));
         Assertions.assertEquals(5, StringCalculator.add("2\n3,1001"));
+    }
+
+    @Test
+    void delimitersOfAnyLengthInNumberStringReturnsSumOfThoseNumbers() {
+        Assertions.assertEquals(12, StringCalculator.add("//[***]\n1***5***6"));
+        Assertions.assertEquals(7, StringCalculator.add("//[;;]\n1;;5\n1"));
+        Assertions.assertEquals(24, StringCalculator.add("//[///]\n11///5///8"));
     }
 
 }
