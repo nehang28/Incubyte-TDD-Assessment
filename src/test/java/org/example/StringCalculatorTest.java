@@ -97,7 +97,14 @@ public class StringCalculatorTest {
     void allowMultipleDelimitersInNumberStringReturnsSumOfThoseNumbers() {
         Assertions.assertEquals(6, StringCalculator.add("//[*][%]\n1*2%3"));
         Assertions.assertEquals(10, StringCalculator.add("//[;][,]\n1;2,3\n4"));
-        Assertions.assertEquals(8, StringCalculator.add("//[*]\n3*2\n3"));
+        Assertions.assertEquals(8, StringCalculator.add("//[*][/]\n3*2/3"));
+    }
+
+    @Test
+    void multipleDelimitersWithLengthLongerThanOneChar() {
+        Assertions.assertEquals(6, StringCalculator.add("//[**][%%%]\n1**2%%%3"));
+        Assertions.assertEquals(13, StringCalculator.add("//[***][;;]\n1;;2***3\n5;;2"));
+        Assertions.assertEquals(8, StringCalculator.add("//[///][;;]\n1///2;;1///4"));
     }
 
 }
