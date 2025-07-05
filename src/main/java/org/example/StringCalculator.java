@@ -2,7 +2,9 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class StringCalculator {
     public static int add(String input) {
@@ -10,23 +12,36 @@ public class StringCalculator {
             return 0;
         }
 
-        String delimiter = "[,\n]";
+        List<String> delimiter = new ArrayList<>();
+        delimiter.add(",");
+        delimiter.add("\n");
 
         if(input.startsWith("//")) {
+            delimiter.clear();
+
             int delimiterEndIndex = input.indexOf("\n");
-            delimiter = input.substring(2, delimiterEndIndex) + "|\n";
-//            delimiter = Pattern.quote(input.substring(2, delimiterEndIndex));
-            if(delimiter.startsWith("[") && delimiter.endsWith("]")) {
-                delimiter = delimiter.substring(1, delimiter.length() - 1);
+            String delimiterPart = input.substring(2, delimiterEndIndex);
+
+            if (delimiterPart.startsWith("[") && delimiterPart.contains("]")) {
+                Matcher matcher = Pattern.compile("\\[(.*?)]").matcher(delimiterPart);
+                while(matcher.find()) {
+                    delimiter.add(Pattern.quote(matcher.group(1)));
+                }
+            } else {
+                delimiter.add(delimiterPart);
             }
-            delimiter += "|\n";
+
+            delimiter.add("\n");
             input = input.substring(delimiterEndIndex + 1);
         }
 
-        String[] numbers = input.split(delimiter);
+        String customDelimiter = (String.join("|", delimiter));
+
+        String[] numbers = input.split(customDelimiter);
         List<Integer> negativeNumbers = new ArrayList<>();
         int sum = 0;
         for(String number : numbers) {
+
             if(!number.trim().isEmpty()) {
                 int numberInt = Integer.parseInt(number.trim());
                 if(numberInt < 0) {
@@ -37,6 +52,7 @@ public class StringCalculator {
                 }
             }
         }
+
         if(!negativeNumbers.isEmpty()) {
             throw new NumberFormatException("negative number not allowed " + negativeNumbers);
         }

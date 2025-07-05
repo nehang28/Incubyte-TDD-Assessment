@@ -93,4 +93,11 @@ public class StringCalculatorTest {
         Assertions.assertEquals(24, StringCalculator.add("//[///]\n11///5///8"));
     }
 
+    @Test
+    void allowMultipleDelimitersInNumberStringReturnsSumOfThoseNumbers() {
+        Assertions.assertEquals(6, StringCalculator.add("//[*][%]\n1*2%3"));
+        Assertions.assertEquals(10, StringCalculator.add("//[;][,]\n1;2,3\n4"));
+        Assertions.assertEquals(8, StringCalculator.add("//[*]\n3*2\n3"));
+    }
+
 }
