@@ -15,7 +15,8 @@ public class StringCalculator {
         if(input.startsWith("//")) {
             int delimiterEndIndex = input.indexOf("\n");
 //            delimiter = input.substring(2, delimiterEndIndex) + "|\n";
-            delimiter = Pattern.quote(input.substring(2, delimiterEndIndex)) + "|\n";
+            delimiter = Pattern.quote(input.substring(2, delimiterEndIndex));
+            delimiter += "|\n";
             input = input.substring(delimiterEndIndex + 1);
         }
 
@@ -28,7 +29,9 @@ public class StringCalculator {
                 if(numberInt < 0) {
                     negativeNumbers.add(numberInt);
                 }
-                sum += Integer.parseInt(number.trim());
+                if(numberInt <= 1000) {
+                    sum += numberInt;
+                }
             }
         }
         if(!negativeNumbers.isEmpty()) {

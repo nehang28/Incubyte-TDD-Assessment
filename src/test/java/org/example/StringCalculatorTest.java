@@ -80,4 +80,10 @@ public class StringCalculatorTest {
         Assertions.assertEquals("negative number not allowed [-1, -2, -7]", ex3.getMessage());
     }
 
+    @Test
+    void numberBiggerThan1000ShouldBeIgnored() {
+        Assertions.assertEquals(2, StringCalculator.add("2,1001"));
+        Assertions.assertEquals(5, StringCalculator.add("2\n3,1001"));
+    }
+
 }
