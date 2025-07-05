@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class StringCalculator {
@@ -21,6 +23,10 @@ public class StringCalculator {
         int sum = 0;
         for(String number : numbers) {
             if(!number.isEmpty()) {
+                int numberInt = Integer.parseInt(number.trim());
+                if(numberInt < 0) {
+                    throw new NumberFormatException("negative number not allowed <" + numberInt + ">");
+                }
                 sum += Integer.parseInt(number.trim());
             }
         }

@@ -44,4 +44,22 @@ public class StringCalculatorTest {
         Assertions.assertEquals(8, StringCalculator.add("//.\n1.2\n3.2"));
     }
 
+    @Test
+    void negativeNumberInNumbersStringThrowsException() {
+        NumberFormatException ex1 = Assertions.assertThrows(NumberFormatException.class, () -> {
+            StringCalculator.add("2\n-1");
+        });
+        Assertions.assertEquals("negative number not allowed <-1>", ex1.getMessage());
+
+        NumberFormatException ex2 = Assertions.assertThrows(NumberFormatException.class, () -> {
+            StringCalculator.add("-3,4,5");
+        });
+        Assertions.assertEquals("negative number not allowed <-3>", ex2.getMessage());
+
+        NumberFormatException ex3 = Assertions.assertThrows(NumberFormatException.class, () -> {
+            StringCalculator.add("\n16,4,-5");
+        });
+        Assertions.assertEquals("negative number not allowed <-5>", ex3.getMessage());
+    }
+
 }
